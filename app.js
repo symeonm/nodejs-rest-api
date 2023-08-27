@@ -1,27 +1,41 @@
-const express = require('express')
-const logger = require('morgan')
-const cors = require('cors')
+// 2qwJRrLRlVNTzgv8
+require("dotenv").config();
+const mongoose = require("mongoose");
+const URI = process.env.DB_HOST;
 
-const contactsRouter = require('./routes/api/contacts')
+async function run() {
+  try {
+    await mongoose.connect(URI);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    mongoose.disconnect();
+  }
+}
+run();
 
-const app = express()
+const express = require("express");
+const logger = require("morgan");
+const cors = require("cors");
 
-const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
+const contactsRouter = require("./routes/api/contacts");
 
-app.use(logger(formatsLogger))
-app.use(cors())
-app.use(express.json())
+const app = express();
 
-app.use('/api/contacts', contactsRouter)
+const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
+app.use(logger(formatsLogger));
+app.use(cors());
+app.use(express.json());
+
+app.use("/api/contacts", contactsRouter);
 
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' })
-})
+  res.status(404).json({ message: "Not found" });
+});
 
 app.use((err, req, res, next) => {
-  res.status(400).json({ message: err.message })
-})
+  res.status(400).json({ message: err.message });
+});
 
-
-
-module.exports = app
+module.exports = app;
