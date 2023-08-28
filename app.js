@@ -1,12 +1,8 @@
-// 2qwJRrLRlVNTzgv8
-require("dotenv").config();
-
-
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-
 const contactsRouter = require("./routes/api/contacts");
+require("dotenv").config();
 
 const app = express();
 
@@ -18,7 +14,7 @@ app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
 
-app.use((req, res) => {
+app.use((_, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
