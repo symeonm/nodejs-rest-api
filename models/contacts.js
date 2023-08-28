@@ -34,20 +34,20 @@ const addContactSchema = Joi.object({
     .min(5)
     .required()
     .messages({ "any.required": "missing required phone field" }),
-  // favorite: Joi.boolean(),
+  favorite: Joi.boolean(),
 });
 
 
 
-// const updFavoriteSchema = Joi.object({
-//   favorite: Joi.boolean()
-//     .required()
-//     .messages({ "any.required": `missing field favorite` }),
-// });
+const updFavoriteSchema = Joi.object({
+  favorite: Joi.boolean()
+    .required()
+    .messages({ "any.required": `missing field favorite` }),
+});
 
 const schemas = {
   addContactSchema,
-  // updFavoriteSchema,
+  updFavoriteSchema,
 };
 
 module.exports = {
