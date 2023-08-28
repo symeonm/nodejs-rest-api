@@ -1,20 +1,6 @@
 // 2qwJRrLRlVNTzgv8
 require("dotenv").config();
-const mongoose = require("mongoose");
-const URI = process.env.DB_HOST;
 
-async function run() {
-  try {
-    await mongoose.connect(URI);
-    process.exit(1);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  } finally {
-    mongoose.disconnect();
-  }
-}
-run();
 
 const express = require("express");
 const logger = require("morgan");
