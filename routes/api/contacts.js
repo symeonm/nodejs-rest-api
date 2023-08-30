@@ -12,10 +12,10 @@ router.get("/:contactId", isValidId, ctrl.getById);
 
 router.post("/", validateBody(schemas.addContactSchema), ctrl.addContact);
 
-router.delete("/:contactId", ctrl.deleteContactById);
+router.delete("/:contactId", isValidId, ctrl.deleteContactById);
 
-router.put("/:contactId", validateBody(schemas.updFavoriteSchema), ctrl.updateContactById);
+router.put("/:contactId", isValidId, validateBody(schemas.addContactSchema), ctrl.updateContactById);
 
-router.patch("/:contactId/favorite", validateBody(schemas.updFavoriteSchema), ctrl.updateContactById);
+router.patch("/:contactId/favorite", isValidId, validateBody(schemas.updFavoriteSchema), ctrl.updateFavorite);
 
 module.exports = router;
