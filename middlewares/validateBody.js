@@ -11,12 +11,9 @@ const validateBody = (schema) => {
     if (error) {
       next(HttpError(400, error.message));
     }
-
     next();
   };
   return func;
 };
 
-module.exports = {
-  validateBody,
-};
+module.exports = validateBody;
