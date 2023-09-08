@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// const SECRET_KEY = process.env;
 
 const { User } = require("../models/user");
 const { HttpError, ctrlWrapper } = require("../helpers");
@@ -42,10 +41,23 @@ const login = async (req, res) => {
   };
 
   const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "23h" });
-  
-  res.status(200).json({token: token, user: { email: user.email, subscription: "starter" } });
+
+  res.status(200).json({
+    token: token,
+    user: { email: user.email, subscription: "starter" },
+  });
 };
+
+const getCurrent = async (req, res) => {
+  const { email, name } = req.user;
+  res.json({
+    email,
+    name,
+  });
+};
+
 module.exports = {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
+  getCurrent: ctrlWrapper(getCurrent),
 };
