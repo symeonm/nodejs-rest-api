@@ -7,7 +7,7 @@ const { User } = require("../models/user");
 const authenticate = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
-  if (bearer !== "Bearer") {
+  if (bearer !== "Bearer" || token === null) {
     next(HttpError(401));
   }
 
